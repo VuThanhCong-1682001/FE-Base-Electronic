@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+p {
+    margin-bottom: 0 !important;
+}
+.item-center{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.error{
+    color: red;
+}
+.product-old-price{
+    text-decoration: line-through;
+}
+.pull-right {
+    text-align: right;
+  }

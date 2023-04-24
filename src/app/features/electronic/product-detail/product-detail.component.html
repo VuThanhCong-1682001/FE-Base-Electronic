@@ -1,0 +1,461 @@
+<div style="margin-top: 50px" class="page-content">
+  <div class="container">
+    <!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+      <div class="container">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a
+              href="javascript;"
+              [routerLink]="['/']"
+              routerLinkActive="router-link-active"
+              >Trang chủ</a
+            >
+          </li>
+          <li class="breadcrumb-item"><a href="#">Chi tiết sản phẩm</a></li>
+          <li *ngIf="itemQuickView.name == ''" class="breadcrumb-item">
+            <a href="#">{{ itemQuickView.name }}</a>
+          </li>
+        </ol>
+      </div>
+      <!-- End .container -->
+    </nav>
+    <!-- End .breadcrumb-nav -->
+    <div class="product-details-top">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="product-gallery product-gallery-vertical">
+            <div class="row">
+              <figure class="product-main-image">
+                <img
+                  id="product-zoom"
+                  [src]="myThumbnail"
+                  alt="product image"
+                />
+              </figure>
+              <!-- End .product-main-image -->
+
+              <div id="product-zoom-gallery" class="product-image-gallery">
+                <a
+                  (click)="changeImage(item)"
+                  class="product-gallery-item active"
+                  href="javascript:;"
+                  *ngFor="let item of itemQuickView.attachments"
+                >
+                  <img [src]="baseFile + item" alt="product side" />
+                </a>
+              </div>
+              <!-- End .product-image-gallery -->
+            </div>
+            <!-- End .row -->
+          </div>
+          <!-- End .product-gallery -->
+        </div>
+        <!-- End .col-md-6 -->
+
+        <div class="col-md-6">
+          <div class="product-details">
+            <h1 class="product-title">{{ itemQuickView.name }}</h1>
+            <!-- End .product-title -->
+
+            <div class="ratings-container">
+              <nz-rate [ngModel]="itemQuickView.rating" nzDisabled></nz-rate>
+              <a class="ratings-text" href="javascript:;" id="review-link"
+                >( {{ listProdReview.length }} Reviews )</a
+              >
+            </div>
+            <!-- End .rating-container -->
+
+            <p
+              class="product-old-price"
+              *ngIf="itemQuickView.discountDefault > 0"
+            >
+              {{ itemQuickView.amoutDefault | currency: "VND" }}
+            </p>
+            <div class="product-price"> 
+              {{
+                itemQuickView.amoutDefault - itemQuickView.discountDefault
+                  | currency: "VND"
+              }}
+            </div>
+            <!-- End .product-price -->
+
+            <div class="product-content">
+              <p>{{ itemQuickView.summary }}</p>
+            </div>
+            <!-- End .product-content -->
+
+            <div class="details-filter-row details-row-size">
+              <label>Màu sắc:</label>
+
+              <div class="product-nav product-nav-thumbs">
+                <a (click)="changeColor(item)" *ngFor="let item of itemQuickView.productColors" href="javascript:void(0)" [ngStyle]="{'background': item.colorCode}"><span class="sr-only">{{item.name}}</span></a>
+              </div>
+              <!-- End .product-nav -->
+            </div>
+            <!-- End .details-filter-row -->
+
+            <div class="details-filter-row details-row-size">
+              <label for="qty">Số lượng:</label>
+              <div class="product-details-quantity">
+                <input
+                  [(ngModel)]="itemQuickView.count"
+                  type="number"
+                  id="qty"
+                  class="form-control"
+                  value="1"
+                  min="1"
+                  max="10"
+                  step="1"
+                  required
+                />
+              </div>
+              <!-- End .product-details-quantity -->
+            </div>
+            <!-- End .details-filter-row -->
+
+            <div class="product-details-action">
+              <a
+                href="javascript:;"
+                (click)="addToCart(itemQuickView)"
+                class="btn-product btn-cart"
+                ><span>Thêm vào giỏ hàng</span></a
+              >
+            </div>
+            <!-- End .product-details-action -->
+
+            <div class="product-details-footer">
+              <div class="product-cat">
+                <span>Loại sản phẩm:</span>
+                <p>{{ itemQuickView.categoryString }}</p>
+              </div>
+              <!-- End .product-cat -->
+            </div>
+            <span class="text-label"><b>Thông tin bổ sung: </b></span>
+              <div class="row">
+                <div class="col-md-12">
+                  <nz-table
+                    [nzPageSize]="10"
+                    #basicTable
+                    [nzData]="
+                      itemQuickView
+                        ? itemQuickView.productMetas
+                        : []
+                    "
+                  >
+                    <thead>
+                      <tr>
+                        <th>Mã</th>
+                        <th>Nội dung</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="
+                          let data of itemQuickView ? basicTable.data : []
+                        "
+                      >
+                        <td>{{ data.key }}</td>
+                        <td>{{ data.content }}</td>
+                      </tr>
+                    </tbody>
+                  </nz-table>
+                </div>
+              </div>
+            <!-- End .product-details-footer -->
+          </div>
+          <!-- End .product-details -->
+        </div>
+        <!-- End .col-md-6 -->
+      </div>
+      <!-- End .row -->
+    </div>
+    <!-- End .product-details-top -->
+
+    <div class="product-details-tab">
+      <ul class="nav nav-pills justify-content-center" role="tablist">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            id="product-desc-link"
+            data-toggle="tab"
+            href="#product-desc-tab"
+            role="tab"
+            aria-controls="product-desc-tab"
+            aria-selected="true"
+            >Chi tiết sản phẩm</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            id="product-review-link"
+            data-toggle="tab"
+            href="#product-review-tab"
+            role="tab"
+            aria-controls="product-review-tab"
+            aria-selected="false"
+            >Bình luận, đánh giá ({{ listProdReview.length }})</a
+          >
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div
+          class="tab-pane fade show active"
+          id="product-desc-tab"
+          role="tabpanel"
+          aria-labelledby="product-desc-link"
+        >
+          <div
+            class="product-desc-content"
+            [innerHTML]="itemQuickView.description"
+          ></div>
+          <!-- End .product-desc-content -->
+        </div>
+        <!-- .End .tab-pane -->
+        <div
+          class="tab-pane fade"
+          id="product-info-tab"
+          role="tabpanel"
+          aria-labelledby="product-info-link"
+        >
+          <div class="product-desc-content">
+            <h3>Information</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
+              odio. Quisque volutpat mattis eros. Nullam malesuada erat ut
+              turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
+              pede. Donec nec justo eget felis facilisis fermentum. Aliquam
+              porttitor mauris sit amet orci.
+            </p>
+
+            <h3>Fabric & care</h3>
+            <ul>
+              <li>Faux suede fabric</li>
+              <li>Gold tone metal hoop handles.</li>
+              <li>RI branding</li>
+              <li>Snake print trim interior</li>
+              <li>Adjustable cross body strap</li>
+              <li>Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
+            </ul>
+
+            <h3>Size</h3>
+            <p>one size</p>
+          </div>
+          <!-- End .product-desc-content -->
+        </div>
+        <!-- .End .tab-pane -->
+        <div
+          class="tab-pane fade"
+          id="product-shipping-tab"
+          role="tabpanel"
+          aria-labelledby="product-shipping-link"
+        >
+          <div class="product-desc-content">
+            <h3>Delivery & returns</h3>
+            <p>
+              We deliver to over 100 countries around the world. For full
+              details of the delivery options we offer, please view our
+              <a href="#">Delivery information</a><br />
+              We hope you’ll love every purchase, but if you ever need to return
+              an item you can do so within a month of receipt. For full details
+              of how to make a return, please view our
+              <a href="#">Returns information</a>
+            </p>
+          </div>
+          <!-- End .product-desc-content -->
+        </div>
+        <!-- .End .tab-pane -->
+        <div
+          class="tab-pane fade"
+          id="product-review-tab"
+          role="tabpanel"
+          aria-labelledby="product-review-link"
+        >
+          <div class="reviews">
+            <nz-card style="width: 100%" nzTitle="Khách hàng chấm điểm, đánh giá, nhận xét">
+              <div class="aa-product-review-area">
+                <h4>{{ listRs.length }} đánh giá về {{ itemQuickView.code }}</h4>
+                <ng-template #commentTemplateRef let-comment="comment">
+                  <nz-comment [nzAuthor]="comment.userName" [nzDatetime]="comment.createdDate">
+                    <nz-avatar nz-comment-avatar [nzIcon]="'user'" [nzSrc]="comment.avatarUrl"></nz-avatar>
+                    <nz-comment-content> </nz-comment-content>
+                    <nz-comment-content>
+                      <nz-rate *ngIf="comment.isRoot === true" [ngModel]="comment.rating" nzDisabled> </nz-rate>
+                    </nz-comment-content>
+                    <nz-comment-content>
+                      <div [innerHTML]="comment.content"></div>
+                    </nz-comment-content>
+                    <nz-comment-action
+                      ><span [hidden]="comment.checked === true" (click)="openReply(comment.id)">Trả lời</span></nz-comment-action
+                    >
+                    <nz-comment-content [hidden]="comment.checked === false" *ngIf="comment.checked === true">
+                      <nz-form-item>
+                        <textarea [(ngModel)]="inputValue" nz-input rows="4"></textarea>
+                      </nz-form-item>
+                      <nz-form-item>
+                        <button
+                          nz-button
+                          nzType="primary"
+                          [disabled]="!inputValue"
+                          (click)="submitComment(comment.id, 2)"
+                        >
+                          Trả lời
+                        </button>
+                        <button style="margin-left: 15px" nz-button nzType="primary" (click)="handleClose(comment.id)">
+                          Đóng
+                        </button>
+                      </nz-form-item>
+                    </nz-comment-content>
+                    <ng-container *ngIf="comment.children && comment.children.length">
+                      <ng-template ngFor let-child [ngForOf]="comment.children">
+                        <ng-template [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: child }">
+                        </ng-template>
+                      </ng-template>
+                    </ng-container>
+                  </nz-comment>
+                </ng-template>
+
+                <div *ngFor="let item of listRs | slice: (pageIndex - 1) * pageSizes:(pageIndex - 1) * pageSizes + pageSizes">
+                  <ng-template [ngTemplateOutlet]="commentTemplateRef" [ngTemplateOutletContext]="{ comment: item }">
+                  </ng-template>
+                  <hr />
+                </div>
+                <nz-pagination
+                  style="float: right; margin-top: 15px"
+                  [(nzPageIndex)]="pageIndex"
+                  [(nzPageSize)]="pageSizes"
+                  [nzTotal]="listRs.length"
+                >
+                </nz-pagination>
+                <h4>Thêm đánh giá</h4>
+                <div class="aa-your-rating">
+                  <p>Bạn đánh giá</p>
+                  <nz-rate [(ngModel)]="value" [nzTooltips]="tooltips"></nz-rate>
+                  <span *ngIf="value" class="ant-rate-text">{{ value ? tooltips[value - 1] : '' }}</span>
+                </div>
+                <!-- review form -->
+                <form action="" class="aa-review-form">
+                  <div class="form-group">
+                    <nz-comment>
+                      <nz-avatar
+                        nz-comment-avatar
+                        [routerLink]="'/account-detail'"
+                        nzIcon="user"
+                        [nzSrc]="token ? userInfo.avatar : ''"
+                      >
+                      </nz-avatar>
+                      <nz-comment-content>
+                        <nz-form-item>
+                          <nz-textarea-count style="width: 100%;" [nzMaxCharacterCount]="100">
+                            <textarea [ngModelOptions]="{standalone: true}" rows="6" [(ngModel)]="inputReview" nz-input></textarea>
+                          </nz-textarea-count>
+                        </nz-form-item>
+                      </nz-comment-content>
+                    </nz-comment>
+                  </div>
+
+                  <div class="item-center">
+                    <button style="align-items: center;" type="button" (click)="submitComment(null, 1)" class="btn btn-primary btn-rounded">
+                      Đánh giá
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </nz-card>
+          </div>
+          <!-- End .reviews -->
+        </div>
+        <!-- .End .tab-pane -->
+      </div>
+      <!-- End .tab-content -->
+    </div>
+    <!-- End .product-details-tab -->
+
+    <h2 class="title text-center mb-4">Bạn có thể thích</h2>
+    <!-- End .title text-center -->
+
+    <div class="row">
+      <div
+      *ngFor="
+      let item of listSimilarActive
+        | slice: (pageIndexSimilar - 1) * pageSizeSimilar:(pageIndexSimilar - 1) * pageSizeSimilar + pageSizeSimilar
+    "
+        class="col-md-4 col-sm-6 col-xs-12 col-lg-3 col-xl-3"
+      >
+        <div class="product product-7 text-center">
+          <figure class="product-media">
+            <span class="product-label label-new">New</span>
+            <a (click)="viewDetail(item.id)" href="javascript:void(0)">
+              <img
+                [src]="baseFile + item.attachments[0]"
+                alt="Product image"
+                class="product-image"
+              />
+            </a>
+
+            <div class="product-action">
+              <a
+                href="javascript:void(0)"
+                (click)="addToCart(item)"
+                class="btn-product btn-cart"
+                ><span>Thêm vào giỏ</span></a
+              >
+            </div>
+            <!-- End .product-action -->
+          </figure>
+          <!-- End .product-media -->
+
+          <div class="product-body">
+            <div class="product-cat">
+              <a href="#">{{ item.categoryString }}</a>
+            </div>
+            <!-- End .product-cat -->
+            <h3 class="product-title">
+              <a href="product.html">{{ item.name }}</a>
+            </h3>
+            <!-- End .product-title -->
+            <p class="product-old-price" *ngIf="item.discountDefault > 0">
+              {{ item.amoutDefault | currency: "VND" }}
+            </p>
+            <div class="product-price">
+              {{ item.amoutDefault - item.discountDefault | currency: "VND" }}
+            </div>
+            <!-- End .product-price -->
+            <nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
+            <div class="product-nav product-nav-thumbs">
+              <a
+                (click)="changeImageSimilar(item.attachments[i], item)"
+                *ngFor="let c of counter(3); let i = index"
+                href="javascript:void"
+              >
+                <img
+                  [src]="baseFile + item.attachments[i]"
+                  [ngClass]="{ active: i == 0 }"
+                  class="product-desc"
+                  alt="product desc"
+                />
+              </a>
+            </div>
+            <!-- End .product-nav -->
+          </div>
+          <!-- End .product-body -->
+        </div>
+        <!-- End .product -->
+      </div>
+      <!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+      <div nz-col class="item-center" [nzXl]="24" nzMd="24" nzSm="24" nzXs="24">
+        <nz-pagination
+          *ngIf="listSimilarActive.length > 0"
+          [(nzPageIndex)]="pageIndexSimilar"
+          [nzPageSize]="pageSizeSimilar"
+          [nzTotal]="listSimilarActive.length"
+          nzSimple="true"
+        ></nz-pagination>
+      </div>
+    </div>
+    <!-- End .owl-carousel -->
+  </div>
+  <!-- End .container -->
+</div>
+<!-- End .page-content -->

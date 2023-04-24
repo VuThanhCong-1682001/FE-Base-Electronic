@@ -1,0 +1,54 @@
+.header-top .container{
+    height: 40px;
+}
+.header-center{
+    display: flex;
+    justify-content: center;
+}
+.text-search-result {
+    position: absolute;
+    z-index: 999999;
+    width: 100%;
+    height: 300px;
+    overflow: auto;
+    overflow-x: hidden;
+    background: white;
+    border-radius: 10px;
+  }
+  #text-search-box {
+    position: relative;
+    text-align: center;                                                                                                                                                                                                                                                                                               
+    border-radius: 50px;
+    outline-width: 0;
+  }
+  .empty-grid{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .item-center {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .dropdown-menu-right{
+    width: 450px !important;
+    height: 450px;
+  }
+  .empty-cart-cls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+  }
+  .dropdown-cart-action{
+    position: relative;
+    z-index: 999;
+  }
+  .price-text {
+    text-decoration: line-through;
+  }
+  .real-price-text {
+    color: red;
+  }

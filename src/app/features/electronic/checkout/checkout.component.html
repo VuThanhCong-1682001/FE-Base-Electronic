@@ -1,0 +1,400 @@
+<main class="main">
+  <div
+    class="page-header text-center"
+    style="background-image: url('assets/images/page-header-bg.jpg')"
+  >
+    <div class="container">
+      <h1 class="page-title">Thanh toán</h1>
+    </div>
+    <!-- End .container -->
+  </div>
+  <!-- End .page-header -->
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a
+            href="javascript;"
+            [routerLink]="['/']"
+            routerLinkActive="router-link-active"
+            >Trang chủ</a
+          >
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+      </ol>
+    </div>
+    <!-- End .container -->
+  </nav>
+  <!-- End .breadcrumb-nav -->
+
+  <div class="page-content">
+    <div class="checkout">
+      <div class="container">
+        <!-- <div class="checkout-discount">
+                    <form action="#">
+                        <input type="text" class="form-control" required id="checkout-discount-input">
+                        <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
+                    </form>
+                </div> -->
+        <!-- End .checkout-discount -->
+        <form action="#">
+          <div class="row">
+            <div class="col-lg-9">
+              <h2 class="checkout-title">Chi tiết đơn hàng</h2>
+              <!-- End .checkout-title -->
+              <form nz-form [formGroup]="form" (ngSubmit)="save()">
+                <div nz-row>
+                  <div nz-col [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <nz-form-item>
+                      <nz-form-label
+                        [nzSm]="6"
+                        [nzXs]="24"
+                        nzRequired
+                        nzFor="code"
+                        >Họ Tên</nz-form-label
+                      >
+                      <nz-form-control
+                        [nzSm]="17"
+                        [nzXs]="24"
+                        nzErrorTip="Họ tên không được để trống!"
+                      >
+                        <input
+                          nzSize="large"
+                          nz-input
+                          formControlName="name"
+                          id="name"
+                          placeholder="Nhập vào họ tên"
+                        />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+
+                  <div nz-col [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <nz-form-item>
+                      <nz-form-label
+                        [nzSm]="6"
+                        [nzXs]="24"
+                        nzRequired
+                        nzFor="name"
+                        >Email</nz-form-label
+                      >
+                      <nz-form-control
+                        [nzSm]="17"
+                        [nzXs]="24"
+                        nzErrorTip="Email không được để trống!"
+                      >
+                        <input
+                          nzSize="large"
+                          nz-input
+                          formControlName="email"
+                          id="email"
+                          placeholder="Nhập vào email"
+                        />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div nz-col [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <nz-form-item>
+                      <nz-form-label
+                        [nzSm]="6"
+                        [nzXs]="24"
+                        nzRequired
+                        nzFor="phoneNumber"
+                        >Điện thoại</nz-form-label
+                      >
+                      <nz-form-control
+                        [nzSm]="17"
+                        [nzXs]="24"
+                        nzErrorTip="Điện thoại không được để trống!"
+                      >
+                        <input
+                          nzSize="large"
+                          type="text"
+                          nz-input
+                          formControlName="phoneNumber"
+                          id="phoneNumber"
+                          placeholder="Nhập vào số điện thoại"
+                        />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div nz-col [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <nz-form-item>
+                      <nz-form-label
+                        [nzSm]="6"
+                        [nzXs]="24"
+                        nzRequired
+                        nzFor="city"
+                        >Tỉnh/ Thành phố</nz-form-label
+                      >
+                      <nz-form-control
+                        [nzSm]="17"
+                        [nzXs]="24"
+                        nzErrorTip="Tỉnh/ Thành phố không được để trống!"
+                      >
+                        <nz-select
+                          nzSize="large"
+                          nzShowSearch
+                          nzMode="default"
+                          (ngModelChange)="changeCity($event)"
+                          nzPlaceHolder="Chọn tỉnh/ thành phố"
+                          formControlName="city"
+                          [nzOptions]="listCity"
+                        >
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div nz-col [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <nz-form-item>
+                      <nz-form-label
+                        [nzSm]="6"
+                        [nzXs]="24"
+                        nzRequired
+                        nzFor="district"
+                        >Quận/ Huyện
+                      </nz-form-label>
+                      <nz-form-control
+                        [nzSm]="17"
+                        [nzXs]="24"
+                        nzErrorTip="Quận huyện không được để trống!"
+                      >
+                        <nz-select
+                          nzSize="large"
+                          nzShowSearch
+                          [nzDisabled]="listDistrict.length === 0"
+                          nzMode="default"
+                          nzPlaceHolder="Chọn quận/ huyện"
+                          (ngModelChange)="changeDistrict($event)"
+                          formControlName="district"
+                          [nzOptions]="listDistrict"
+                        >
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div nz-col [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <nz-form-item>
+                      <nz-form-label
+                        [nzSm]="6"
+                        [nzXs]="24"
+                        nzRequired
+                        nzFor="commune"
+                        >Xã/ Phường/ Thị trấn
+                      </nz-form-label>
+                      <nz-form-control
+                        [nzSm]="17"
+                        [nzXs]="24"
+                        nzErrorTip="Xã/ Phường không được để trống!"
+                      >
+                        <nz-select
+                          nzSize="large"
+                          nzShowSearch
+                          [nzDisabled]="listCommune.length === 0"
+                          nzMode="default"
+                          nzPlaceHolder="Chọn Xã/ Phường"
+                          formControlName="commune"
+                          [nzOptions]="listCommune"
+                        >
+                        </nz-select>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div nz-col [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <nz-form-item>
+                      <nz-form-label
+                        [nzSm]="6"
+                        [nzXs]="24"
+                        nzRequired
+                        nzFor="metaTitle"
+                        >Địa chỉ chi tiết
+                      </nz-form-label>
+                      <nz-form-control
+                        [nzSm]="17"
+                        [nzXs]="24"
+                        nzErrorTip="Địa chỉ chi tiết không được để trống!"
+                      >
+                        <input
+                          nzSize="large"
+                          nz-input
+                          formControlName="addressDetail"
+                          id="addressDetail"
+                          placeholder="Nhập vào địa chỉ chi tiết"
+                        />
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                  <div nz-col [nzSm]="24" [nzMd]="24" [nzLg]="24">
+                    <nz-form-item>
+                      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="metaTitle"
+                        >Ghi chú
+                      </nz-form-label>
+                      <nz-form-control [nzSm]="17" [nzXs]="24">
+                        <textarea
+                          nzSize="large"
+                          rows="4"
+                          nz-input
+                          formControlName="note"
+                        ></textarea>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- End .col-lg-9 -->
+            <aside class="col-lg-3">
+              <div class="summary">
+                <h3 class="summary-title">Đơn hàng của bạn</h3>
+                <!-- End .summary-title -->
+
+                <table class="table table-summary">
+                  <thead>
+                    <tr>
+                      <th>Sản phẩm</th>
+                      <th>Tổng số</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let item of listCart">
+                      <td>
+                        <a href="javascript:void(0)">{{ item.name }}</a>
+                      </td>
+                      <td>
+                        {{ item.count }} x
+                        <span
+                          *ngIf="item.discountDefault > 0"
+                          class="product-old-price"
+                          >{{ item.amoutDefault | currency: "VND" }}</span
+                        >
+                        <span>
+                          {{
+                            item.amoutDefault - item.discountDefault
+                              | currency: "VND"
+                          }}</span
+                        >
+                        <br />
+                        =
+                        <span>{{ item.subTotal | currency: "VND" }}</span>
+                      </td>
+                    </tr>
+                    <tr class="summary-subtotal">
+                      <td>Tổng giá sản phẩm:</td>
+                      <td>{{ total | currency: "VND" }}</td>
+                    </tr>
+                    <!-- End .summary-subtotal -->
+                    <tr>
+                      <td>Phí giao hàng:</td>
+                      <td>Miễn phí</td>
+                    </tr>
+                    <tr class="summary-total">
+                      <td>Tổng số:</td>
+                      <td>{{ total | currency: "VND" }}</td>
+                    </tr>
+                    <!-- End .summary-total -->
+                  </tbody>
+                </table>
+                <!-- End .table table-summary -->
+
+                <div class="accordion-summary" id="accordion-payment">
+                  <div class="card">
+                    <div class="card-header" id="heading-3">
+                      <h2 class="card-title">
+                        <a
+                          class="collapsed"
+                          role="button"
+                          (click)="changePaymentType(0)"
+                          data-toggle="collapse"
+                          href="#collapse-3"
+                          aria-expanded="false"
+                          aria-controls="collapse-3"
+                        >
+                          Thanh toán khi nhận hàng
+                        </a>
+                      </h2>
+                    </div>
+                    <!-- End .card-header -->
+                    <div
+                      id="collapse-3"
+                      class="collapse"
+                      aria-labelledby="heading-3"
+                      data-parent="#accordion-payment"
+                    >
+                      <div class="card-body">
+                        Giao hàng và nhận hàng miễn phí tại nhà.
+                      </div>
+                      <!-- End .card-body -->
+                    </div>
+                    <!-- End .collapse -->
+                  </div>
+                  <!-- End .card -->
+
+                  <div class="card">
+                    <div class="card-header" id="heading-4">
+                      <h2 class="card-title">
+                        <a
+                          class="collapsed"
+                          (click)="changePaymentType(1)"
+                          role="button"
+                          data-toggle="collapse"
+                          href="#collapse-4"
+                          aria-expanded="false"
+                          aria-controls="collapse-4"
+                        >
+                          PayPal
+                          <small class="float-right paypal-link"
+                            >What is PayPal?</small
+                          >
+                        </a>
+                      </h2>
+                    </div>
+                    <!-- End .card-header -->
+                    <div
+                      id="collapse-4"
+                      class="collapse"
+                      aria-labelledby="heading-4"
+                      data-parent="#accordion-payment"
+                    >
+                      <div class="card-body">
+                        PayPal được hiểu đơn giản là một dịch vụ trung gian dùng
+                        để thanh toán và chuyển tiền quốc tế qua mạng Internet.
+                        Với PayPal thì các bạn có thể thanh toán khi mua sắm
+                        trực tuyến ở nước ngoài hoặc nhận tiền chi trả từ nước
+                        ngoài gửi về Việt Nam.
+                      </div>
+                      <div *ngIf="paymentType === 1 && form.valid" class="col-12">
+                        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                      </div>
+                      <!-- End .card-body -->
+                    </div>
+                    <!-- End .collapse -->
+                  </div>
+                  <!-- End .card -->
+                </div>
+                <!-- End .accordion -->
+
+                <button
+                  [disabled]="listCart.length === 0"
+                  (click)="save()"
+                  type="submit"
+                  class="btn btn-outline-primary-2 btn-order btn-block"
+                >
+                  <span class="btn-text">Đặt hàng</span>
+                  <span class="btn-hover-text">Đặt hàng</span>
+                </button>
+              </div>
+              <!-- End .summary -->
+            </aside>
+            <!-- End .col-lg-3 -->
+          </div>
+          <!-- End .row -->
+        </form>
+      </div>
+      <!-- End .container -->
+    </div>
+    <!-- End .checkout -->
+  </div>
+  <!-- End .page-content -->
+</main>
+<!-- End .main -->
