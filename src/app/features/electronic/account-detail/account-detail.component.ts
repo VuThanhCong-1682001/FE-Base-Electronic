@@ -124,6 +124,28 @@ export class AccountDetailComponent implements OnInit {
   buildAgain() {
     this.router.navigateByUrl('/search?textSearch=');
   }
+  confirmOrder(item) {
+    let data = {
+      id: item.id,
+      status: 3,
+    };
+    console.log(132, data)
+    this.orderService.updateStatusOrder(data).subscribe(
+      (res: any) => {
+        if (res.code === 200) {
+          this.nzMessage.success(`Cảm ơn bạn đã mua hàng. Hãy đánh giá sản phẩm thật tốt nhé ^^`);
+          this.fetchOrderByUser();
+        }
+      },
+      (err: any) => {
+        if (err.error) {
+          this.nzMessage.error(`${err.error.message}`);
+        } else {
+          this.nzMessage.error(`${err.status}`);
+        }
+      },
+    );
+  }
   viewDetailOrder(item: any) {
     this.viewDetail = true;
     this.itemDetail = item;

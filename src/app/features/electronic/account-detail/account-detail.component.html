@@ -272,6 +272,16 @@
                                         <div class="col-md-12 pull-right">
                                           <button
                                             nz-button
+                                            (click)="confirmOrder(item)"
+                                            [nzDanger]="item.status === 3"
+                                            [ngClass]="{ 'text-highlight': item.status === 3 ? true : false }"
+                                            *ngIf="item.status === 0 || (item.status === 1 && item.status !== -1)"
+                                            nzType="default"
+                                          >
+                                            Đã nhận
+                                          </button>
+                                          <button
+                                            nz-button
                                             (click)="rate(item)"
                                             [nzDanger]="item.status === 3"
                                             [ngClass]="{ 'text-highlight': item.status === 3 ? true : false }"
