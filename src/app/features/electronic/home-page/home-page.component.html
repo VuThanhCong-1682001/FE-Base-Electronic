@@ -14,26 +14,26 @@
 					<div class="intro-banners">
 						<div class="banner mb-lg-1 mb-xl-2">
 							<a href="#">
-								<img src="assets/images/demos/demo-3/banners/banner-1.jpg" alt="Banner">
+								<img src="assets/images/demos/demo-3/banners/banner-7.jpg" alt="Banner">
 							</a>
 
-							
+
 						</div><!-- End .banner -->
 
-						<div class="banner mb-lg-1 mb-xl-2">
+						<div class="banner mb-0 mb-lg-1 mb-xl-2">
 							<a href="#">
-								<img src="assets/images/demos/demo-3/banners/banner-2.jpg" alt="Banner">
+								<img src="assets/images/demos/demo-3/banners/banner-10.jpg" alt="Banner">
 							</a>
 
-							
+
 						</div><!-- End .banner -->
 
-						<div class="banner mb-0">
+            <div class="banner mb-0">
 							<a href="#">
-								<img src="assets/images/demos/demo-3/banners/banner-3.jpg" alt="Banner">
+								<img src="assets/images/demos/demo-3/banners/banner-9.jpg" alt="Banner">
 							</a>
 
-						
+
 						</div><!-- End .banner -->
 					</div><!-- End .intro-banners -->
 				</div><!-- End .col-lg-4 -->
@@ -64,14 +64,14 @@
 								<a (click)="viewDetail(item.id)"  href="javascript:void(0)"  >
 									<img [src]="item.urlImageActive" alt="Product image" class="product-image">
 								</a>
-		
 
-		
+
+
 								<div class="product-action">
 									<a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
 								</div><!-- End .product-action -->
 							</figure><!-- End .product-media -->
-		
+
 							<div class="product-body">
 								<div class="product-cat">
 									<a href="#">{{item.categoryString}}</a>
@@ -84,7 +84,7 @@
 									{{item.amoutDefault-item.discountDefault | currency: 'VND'}}
 								</div><!-- End .product-price -->
 								<nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
-								
+
 								<div class="product-nav product-nav-thumbs">
 									<a (click)="changeImage(item.attachments[i], item)" *ngFor="let c of counter(3);let i = index" href="javascript:void">
 										<img [src]="baseFile + item.attachments[i]" [ngClass]="{'active': i == 0}" class="product-desc" alt="product desc">
@@ -108,12 +108,12 @@
 									<img [src]="item.urlImageActive" alt="Product image" class="product-image">
 								</a>
 
-		
+
 								<div class="product-action">
 									<a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
 								</div><!-- End .product-action -->
 							</figure><!-- End .product-media -->
-		
+
 							<div class="product-body">
 								<div class="product-cat">
 									<a href="#">{{item.categoryString}}</a>
@@ -126,7 +126,7 @@
 									{{item.amoutDefault-item.discountDefault | currency: 'VND'}}
 								</div><!-- End .product-price -->
 								<nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
-								
+
 								<div class="product-nav product-nav-thumbs">
 									<a (click)="changeImage(item.attachments[i], item)" *ngFor="let c of counter(3);let i = index" href="javascript:void">
 										<img [src]="baseFile + item.attachments[i]" [ngClass]="{'active': i == 0}" class="product-desc" alt="product desc">
@@ -149,13 +149,13 @@
 								<a (click)="viewDetail(item.id)" href="javascript:void(0)"  >
 									<img [src]="item.urlImageActive" alt="Product image" class="product-image">
 								</a>
-		
-		
+
+
 								<div class="product-action">
 									<a href="javascript:void(0)" (click)="addToCart(item)" class="btn-product btn-cart"><span>Thêm vào giỏ</span></a>
 								</div><!-- End .product-action -->
 							</figure><!-- End .product-media -->
-		
+
 							<div class="product-body">
 								<div class="product-cat">
 									<a href="#">{{item.categoryString}}</a>
@@ -168,7 +168,7 @@
 									{{item.amoutDefault-item.discountDefault | currency: 'VND'}}
 								</div><!-- End .product-price -->
 								<nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
-								
+
 								<div class="product-nav product-nav-thumbs">
 									<a (click)="changeImage(item.attachments[i], item)" *ngFor="let c of counter(3);let i = index" href="javascript:void">
 										<img [src]="baseFile + item.attachments[i]" [ngClass]="{'active': i == 0}" class="product-desc" alt="product desc">
@@ -221,7 +221,7 @@
 							{{item.amoutDefault-item.discountDefault | currency: 'VND'}}
 						</div><!-- End .product-price -->
 						<nz-rate [ngModel]="item.rating" nzDisabled></nz-rate>
-						
+
 						<div class="product-nav product-nav-thumbs">
 							<a (click)="changeImage(item.attachments[i], item)" *ngFor="let c of counter(3);let i = index" href="javascript:void">
 								<img [src]="baseFile + item.attachments[i]" [ngClass]="{'active': i == 0}" class="product-desc" alt="product desc">

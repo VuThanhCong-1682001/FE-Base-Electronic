@@ -13,13 +13,17 @@ import { ProductService } from 'src/app/services/electronic-management/product/p
 })
 export class HomePageComponent implements OnInit {
   array:any[] = [{
-    url:'url(../../../../assets/images/slider1.png)'
+    url:'url(../../../../assets/images/slider-11.jpg)'
   },{
-    url:'url(../../../../assets/images/slider2.png)'
+    url:'url(../../../../assets/images/slider-12.jpg)'
   },{
-    url:'url(../../../../assets/images/slider3.png)'
+    url:'url(../../../../assets/images/slider-13.jpg)'
   },{
-    url:'url(../../../../assets/images/slider4.png)'
+    url:'url(../../../../assets/images/slider-14.jpg)'
+  },{
+    url:'url(../../../../assets/images/slider-15.jpg)'
+  },{
+    url:'url(../../../../assets/images/slider-16.jpg)'
   }];
   snapshot: RouterStateSnapshot;
   listSupplier: any[] = [];
@@ -81,7 +85,7 @@ export class HomePageComponent implements OnInit {
         this.listCategory.map(cate => {
          cate.products.forEach((prod:any) => {
           prod.precentDiscount = Math.round((prod.discountDefault/prod.amoutDefault)*100);
-          
+
           prod.urlImageActive = this.baseFile + prod.attachments[0];
          });
         });
@@ -120,7 +124,7 @@ export class HomePageComponent implements OnInit {
       this.listProduct = res.data.data;
       this.listProduct.map(prod => {
         prod.precentDiscount = Math.round((prod.discountDefault/prod.amoutDefault)*100);
-        
+
         prod.urlImageActive = this.baseFile + prod.attachments[0];
       });
       this.totalCount = res.data.totalCount;
