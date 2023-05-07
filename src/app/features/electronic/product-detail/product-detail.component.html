@@ -96,7 +96,13 @@
             <!-- End .details-filter-row -->
 
             <div class="details-filter-row details-row-size">
-              <label for="qty">Số lượng:</label>
+              <label>Số lượng:</label>
+              <label>{{itemQuickView.quantity}}</label>
+              <!-- End .product-nav -->
+            </div>
+
+            <div class="details-filter-row details-row-size">
+              <label for="qty">Số lượng mua:</label>
               <div class="product-details-quantity">
                 <input
                   [(ngModel)]="itemQuickView.count"
