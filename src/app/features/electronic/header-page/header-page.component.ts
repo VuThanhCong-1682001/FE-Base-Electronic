@@ -114,8 +114,8 @@ export class HeaderPageComponent implements OnInit {
         break;
     }
   }
-  viewDetail(code: any) {
-    this.router.navigate(['/product-detail/' + code]);
+  viewDetail(item: any) {
+    this.router.navigate(['/product-detail/' + item.id]);
   }
   enterSearch() {
     this.router.navigateByUrl('search?textSearch=' + this.textSearch);

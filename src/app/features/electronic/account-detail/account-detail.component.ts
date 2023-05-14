@@ -149,8 +149,6 @@ export class AccountDetailComponent implements OnInit {
   viewDetailOrder(item: any) {
     this.viewDetail = true;
     this.itemDetail = item;
-    console.log(this.itemDetail);
-    
   }
   onBack() {
     this.viewDetail = false;
@@ -276,12 +274,14 @@ export class AccountDetailComponent implements OnInit {
     this.isVisible = false;
   }
   cancelOrder(item: any) {
+    console.log(item);
     this.modal.confirm({
       nzTitle: '<i>Bạn có chắc chắn muốn hủy đơn hàng không?</i>',
       nzOnOk: () => {
         let data = {
           id: item.id,
           status: -1,
+          listProducts: JSON.stringify(item.listProducts)
         };
         this.orderService.updateStatusOrder(data).subscribe(
           (res: any) => {
@@ -515,7 +515,7 @@ export class AccountDetailComponent implements OnInit {
     };
     const userModel = this.tokenService.get();
     const UpdateUserModel = {
-      userName: userModel?.userName,
+      userName: userModel?.username,
       oldPassword: changePwModel.oldPassword,
       newPassword: changePwModel.newPassword,
     };

@@ -107,9 +107,9 @@
                   <nz-spin nzSimple></nz-spin>
                 </div>
               </div>
-              <div
+                <div
                 style="margin: 15px; cursor: pointer"
-                (click)="viewDetail(item.code)"
+                (click)="viewDetail(item)"
                 class="row"
                 *ngFor="let item of listProd"
               >
@@ -122,7 +122,7 @@
                   />
                 </div>
                 <div class="col-md-10">
-                  <div class="row">
+                  <div class="row" >
                     <div class="col-md-12">
                       <p>{{ item.name }}</p>
                     </div>
